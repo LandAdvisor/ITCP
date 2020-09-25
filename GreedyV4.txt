@@ -1,0 +1,47 @@
+Run Analysis parameter Analysis Type:
+- Composition Only
+- Composition and Connectivity
+- Composition and Contiguity
+- Composition, Connectivity and Contiguity
+- Greedy Heuristic (includes Composition, Connectivity and Contiguity)
+
+The Greedy Heuristic iteratively selects (recommends) properties. It assumes selected properties are Protected and then recalculates the Composition, Connectivity and Contiguity for each selection iteration/round. Because Connectivity is an order of magnitude slower to run than Composition and Contiguity, it may not be recalculated on every iteration (based on the Recalc Interval parameter).
+
+Size parameters (areas and distances) are in the units of the input Property Feature Class.
+
+Run Analysis parameters for Greedy Heuristic:
+- Greedy Target Type (choices Budget, Area, Biodiversity-based Area, Property Count, Biodiversity-based Property Count)
+- Greedy Budget Target (only applies to Greedy Target Type = Budget)
+- Greedy Area Target (only applies to Greedy Target Type = Area or Biodiversity Based Area)
+- Greedy Property Count Target (only applies to Greedy Target Type = PropertyCount or Biodiversity Based Property Count)
+- Properties Per Greedy Iteration (number of properties to select per iteration)
+- Connectivity Recalc Interval (how often to recaculate Connectivity)
+- Minimum Property Size (smallest property to select)
+
+Run Analysis simplified algorithm:
+
+Record model parameters
+
+Make copy of Properties called ScenarioOutputX
+
+Iterate
+	Run Composition (includes many sub-components)
+
+	If (AnalysisType includes Connectivity) and (On ConnectivitySkipInterval)
+		Run Connectivity
+
+	If AnalysisType includes Contiguity
+		Run Contiguity
+
+	If AnalysisType includes Composition, Connectivity and Contiguity
+		Run Biodiversity
+		Run Acquisition Priority
+
+	If AnalysisType is Greedy Heuristic
+		Flag Top PropertiesPerGreedyIteration in ScenarioOutputX as Recommended Acquisition Order Y (integer to indicate recommended order)
+		Add "Best" PropertiesPerGreedyIteration to Protected Areas with custom IUCN category
+		Flag "Best" PropertiesPerGreedyIteration in Properties so they are excluded from next iteration
+		If TotalSpent is > AcquisitionBudget TotalArea > AreaBudget or TotalPropertiesAcquired is > AcquistionCount target
+			Stop iterating
+	Else
+		Stop iterating

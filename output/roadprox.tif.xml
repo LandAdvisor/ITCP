@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xml:lang="en"><Esri><CreaDate>20191117</CreaDate><CreaTime>13123000</CreaTime><ArcGISFormat>1.0</ArcGISFormat><SyncOnce>TRUE</SyncOnce><DataProperties><lineage><Process Name="Road Proximity" ToolSource="I:\ITGIS\TOOLS\LandAdvisor\LandAdvisor-ITCP-4.1.0-Sample\toolbox\LandAdvisor-ITCP.tbx\RoadProximity" Date="20191117" Time="131230">RoadProximity Inputs\TRANSIT_ROADS_MOT 1500 0.5 I:\ITGIS\TOOLS\LandAdvisor\LandAdvisor-ITCP-4.1.0-Sample\output\roadprox.tif</Process></lineage></DataProperties></Esri></metadata>

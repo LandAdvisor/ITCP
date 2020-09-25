@@ -1,0 +1,51 @@
+Connectivity Algorithm
+
+Inputs:
+	Composition (as 0-1 raster)
+	Roads (with a 0-1 Road Threat field)
+	Road Threat Multiplier
+	Streams
+	Stream Benefit Factor
+	Cores / Protected Areas (unique identifier for each)
+	Study Area (mask)
+	Smallest Protected Area (to include in analysis)
+	Maximum Protected Area Separation
+	Percentage of Corridor Values to Keep
+	Permeability Weight
+	Corridor Envelope Weight
+	LCP Length Weight
+
+Generate Cost Surface from Composition, Road Threat and Stream Benefit
+	X = 1 - Composition
+	Y = Road Threat X Road Threat Multiplier for Roads (with NoData = 0)
+	Z = 1 / Stream Benefit Factor for Streams (with NoData = 1)
+	Cost Surface = Z * (X + Y)
+
+Exclude small Protected Areas
+
+For each Protected Area
+	Generate separate raster
+	Calc Cost Distance with Backlinks
+
+Determine the Distance between each pair of Protected Areas, limiting pairs to those at least as close as the maxProtectedAreaSeparation
+
+For each unique pair of Protected Areas
+	Calc Corridor
+	Calc Least Cost Path (LCP)
+	Estimate LCP Length as LCP Cell Count (potential to improve this)
+	Calc Standardized Corridor as Corridor divided by LCP
+	Create Corridor Envelope by eliminating higher values from Standardized Corridor using percentageCorridorValuesToKeep
+	Extract Corridor cells only within Corridor Envelope
+	Calc Impermeability as EXtracted Corridor divided by LCP Length
+	In the process, prepare for normalization
+		Find minimum and maximum of all Impermeability rasters
+		Find minimum and maximum of all LCPLengths
+
+For each unique pair of Protected Areas
+	Invert/Normalize Impermeability based on overall min and max (A - permeability from the wildlife perspective is desirable)
+	Invert/Normalize Corridor Envelope (B - crucial corridors between core areas need to be considered, even if they have low permeability)
+	Invert/Normalize LCP Length based on overall min and max (C - shorter corridors are better than longer corridors of the same permeability)
+	Calc Pair Connectivity as Weighted Sum of A, B, C (default weights 0.7, 0.2, 0.1) 
+
+Calc Overall Connectivity as Max of all Pair Connectivity rasters
+Normalize the output so the lowest valued cell of the lowest value corridor is 0
