@@ -1,5 +1,5 @@
-# ITCP
-LandAdvisor sample project for ArcGIS Desktop 10.x based on the Islands Trust Conservation Planning project
+# Prototype-IT
+LandAdvisor sample project for ArcGIS Desktop 10.x based on the Islands Trust conservation planning project
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
