@@ -1,5 +1,6 @@
-# Prototype-IT
-This is the OLD Location, please see https://github.com/EarthwiseFramework/Prototype-IT
+# Prototype-IT (OLD LOCATION)
+
+**This is the OLD Location, please see https://github.com/EarthwiseFramework/Prototype-IT**
 
 The Earthwise Framework SDSS for the sample project based on Islands Trust, British Columbia, conservation planning. (Note that it was originally called LandAdvisor.)
 
